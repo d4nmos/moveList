@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить фильм</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<div class="container">
+    <h1>Добавить фильм</h1>
+<!--    <div th:if="${errorMessage}" class="alert alert-danger">-->
+<!--        <p th:text="${errorMessage}"></p>-->
+<!--    </div>-->
+    <form th:action="@{/movie/save}" th:object="${savedMovie}" method="post">
+        <div class="form-group">
+            <label for="name">Название фильма:</label>
+            <input class="form-control" id="name" th:field="*{name}" placeholder="Название фильма">
+        </div>
+        <div class="form-group">
+            <label for="genre">Жанр:</label>
+            <select class="form-control" id="genre" th:field="*{genre.id}">
+                <option th:each="genre : ${genres}" th:text="${genre.name}" th:value="${genre.id}"/>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="director">Режиссер:</label>
+            <select class="form-control" id="director" th:field="*{director.id}">
+                <option th:each="director : ${directors}" th:text="${director.name}" th:value="${director.id}"/>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить фильм</button>
+    </form>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+</html>

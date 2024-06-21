@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${userList.get().name}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="header :: header" />
+<div class="container">
+    <h2 th:text="${userList.get().name}" />
+    <p th:text="${userList.get().description}" />
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+        <th scope="col">Жанр</th>
+        <th scope="col">Режиссер</th>
+        <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td th:text="${movie.name}" />
+        <td th:text="${movie.genre.name}" />
+        <td th:text="${movie.director.name}" />
+        <td>
+            <form th:action="@{/userList/deleteMovieFromList}" method="post">
+                <input type="hidden" name="userListId" th:value="${id}">
+                <input type="hidden" name="movieId" th:value="${movie.id}">
+                <button type="submit" class="btn btn-danger">Удалить фильм</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Все списки</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="header :: header" />
+<div class="container">
+  <h1>Списки пользователя</h1>
+  <br>
+  <a class="btn btn-primary" th:href="@{/listOfLists/addList}">Добавить список</a>
+  <br>
+  <table class="table">
+    <tbody>
+    <tr th:each="elm : ${userLists}">
+      <td><a th:text="${elm.name}" th:href="@{/userList/{id}(id = ${elm.id})}" /></td>
+      <td>
+        <form th:action="@{/listOfLists/deleteList}" method="post">
+          <input type="hidden" name="userListId" th:value="${elm.id}">
+          <button class="btn btn-danger" type="submit">Удалить список</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

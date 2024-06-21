@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Администрирование</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<div class="container">
+  <h1>Администрирование</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Действия</th>
+      <th scope="col">Описание</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><a class="btn btn-primary" th:href="@{/movie/admin/add}">Добавить фильм</a></td>
+      <td>Добавить новый фильм в систему</td>
+    </tr>
+    <tr th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+      <td><a class="btn btn-primary" th:href="@{/admin/director/add}">Добавить режиссера</a></td>
+      <td>Добавить нового режиссера в систему</td>
+    </tr>
+    <tr th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+      <td><a class="btn btn-primary" th:href="@{/admin/genre/add}">Добавить жанр</a></td>
+      <td>Добавить новый жанр в систему</td>
+    </tr>
+    <tr th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}">
+      <td><a class="btn btn-primary" th:href="@{/admin/registrationAdmin}">Регистрация Админа</a></td>
+      <td>Зарегистрировать нового администратора</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

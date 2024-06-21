@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить новый список</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="header :: header" />
+<div class="container">
+    <h1>Добавить новый список</h1>
+    <form th:action="@{/listOfLists/save}" th:object="${savedUserList}" method="post">
+        <div class="form-group">
+            <label for="name">Название списка:</label>
+            <input class="form-control" id="name" th:field="*{name}" placeholder="Название списка">
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <input class="form-control" id="description" th:field="*{description}" placeholder="Описание">
+        </div>
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    </form>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

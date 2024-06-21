@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Movie manager</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/}">Главная</a>
+    <a class="navbar-brand" th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')">Администрирование</a>
+    <a class="navbar-brand" th:href="@{/movie/list}" sec:authorize="isAuthenticated()">Список всех фильмов</a>
+<!--    <a class="navbar-brand" th:href="@{/movie/search}" sec:authorize="isAuthenticated()">Поиск фильмов</a>-->
+    <a class="navbar-brand" th:href="@{/registration}" sec:authorize="!isAuthenticated()">Регистрация</a>
+    <a class="navbar-brand" th:href="@{/listOfLists/show}" sec:authorize="isAuthenticated()" >Списки</a>
+    <a class="navbar-brand" th:href="@{/recommendation}" sec:authorize="isAuthenticated()">Рекомендации</a>
+
+    <a class="btn btn-warning" th:href="@{/logout}" sec:authorize="isAuthenticated()">Выход</a>
+    <a class="btn btn-primary" th:href="@{/login}" sec:authorize="!isAuthenticated()">Вход</a>
+  </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить режиссера</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<div class="container">
+    <h1>Добавить режиссера</h1>
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+    <form th:action="@{/admin/director/save}" th:object="${director}" method="post">
+        <div class="form-group">
+            <label for="name">Фамилия и имя:</label>
+            <input class="form-control" id="name" th:field="*{name}" placeholder="Фамилия и имя">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить режиссера</button>
+    </form>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

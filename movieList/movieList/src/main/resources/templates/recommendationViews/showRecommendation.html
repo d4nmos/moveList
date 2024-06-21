@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Рекомендации</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<header th:insert="header :: header" />
+<h1>Рекомендованные фильмы</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Название</th>
+        <th scope="col">Режиссер</th>
+        <th scope="col">Жанр</th>
+        <th scope="col">Действия</th>
+        <th scope="col">Добавить в список</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="elm : ${recommendedMovies}">
+        <td th:text="${elm.name}" />
+        <td th:text="${elm.director.name}" />
+        <td th:text="${elm.genre.name}" />
+        <td>
+            <form th:action="@{/deleteFromRecommendation}" method="post">
+                <input type="hidden" name="movieId" th:value="${elm.id}">
+                <input type="hidden" name="userProfileId" th:value="${userProfile.id}">
+                <button type="submit" class="btn btn-danger">Неинтересно</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/addToList}" th:object="${savedMovieInList}" method="post">
+                <select th:field="*{selectedList}" class="form-control">
+                    <option th:each="list : ${savedMovieInList.allUserLists}" th:text="${list.name}" th:value="${list.id}"></option>
+                </select>
+                <input type="hidden" name="movieId" th:value="${elm.id}">
+                <input type="hidden" name="userProfileId" th:value="${userProfile.id}">
+                <br>
+                <input type="submit" value="Добавить фильм" class="btn btn-primary">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

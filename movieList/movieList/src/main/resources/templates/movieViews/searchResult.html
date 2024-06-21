@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Список фильмов</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="header :: header"></header>
+<div class="container">
+  <h1 class="mt-5">Movies list</h1>
+  <table class="table">
+    <tbody>
+    <tr th:each="elm : ${searchResult}">
+      <td><a th:text="${elm.name}" th:href="@{/movie/{id}(id = ${elm.id})}"/></td>
+      <td>
+        <form th:action="@{/movie/searchResult}" th:object="${savedMovieInList}" method="post">
+          <div class="form-group">
+            <select class="form-control" th:field="*{selectedList}">
+              <option th:each="list : ${savedMovieInList.allUserLists}" th:text="${list.name}"
+                      th:value="${list.name}"/>
+            </select>
+          </div>
+          <input type="hidden" name="movieId" th:value="${elm.id}">
+          <br>
+          <button class="btn btn-primary" type="submit">Добавить фильм</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
